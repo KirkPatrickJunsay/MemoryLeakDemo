@@ -15,11 +15,23 @@ namespace MemoryLeakDemo
 		public SubPage2 ()
 		{
 			InitializeComponent ();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
 
             MessagingCenter.Subscribe<string>(this, "UpdatePage2Label", (param) =>
             {
                 Page2Label.Text = param;
             });
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            MessagingCenter.Unsubscribe<string>(this, "UpdatePage2Label");
         }
     }
 }
